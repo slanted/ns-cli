@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script>if (!window.customElements) { document.write('<!--'); }</script>
+    <script type="text/javascript" src="https://developers.nuskin.com/custom-elements-es5-adapter.js"></script>
+    <!--! do not remove -->
+    
+    <!-- Proxima Nova Font -->
+    <script src="https://use.typekit.net/drl7neu.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    
+    <title>Nuskin Playground Product Detail</title>
+    
+    <style>
+        html, body {
+            overscroll-behavior: none;
+            /* TODO: why is this not working in common-transition-styles? */
+            margin: 0;
+        }
+    </style>
+</head>
+<body unresolved>
+<script src="bootstrap.js"></script>
+<script>
+    const client = contentful.createClient({
+        space: 'g2xs47c5khyt',
+        accessToken: "463b6ec26344670fed1cf196d392973828f827769e35ac9e2226a92dd79ea346"
+    });
+
+    client.getEntry("31TNnjHlfaGUoMOwU0M2og")
+        .then(entry => {
+            console.log("entry:",entry);
+            var body = entry.fields.body;
+            var description = entry.fields.description;
+
+            document.getElementById("contentful").innerHTML = description;
+
+        })
+        .catch(err => console.log(err));
+
+
+    // client.getEntries()
+    //     .then((response) => {
+    //         console.log("entries:", response);
+    //     })
+
+    // const preview = contentful.createClient({
+    //     space: 'g2xs47c5khyt',
+    //     accessToken: 'dd83ba76667d22c96a174589327f1dbac3215c6f600ae7ba2351afe0aeb8ee59'
+    // });
+
+    // preview.getEntries() 
+    //     .then((response) => {
+    //         console.log("preview entries:", response);
+    //     });
+    
+</script>
+<!-- <h3 style="position:fixed; z-index:2000; background-color: white;">h3 outside of polymer!</h3> -->
+<ns-header></ns-header>
+    <div style="margin-top:40px;">
+        <!-- base sku -->
+        Here is some contentful stuff: <div id="contentful"></div>
+        <ns-product-detail sku="01001576"></ns-product-detail>
+        <ns-product-detail sku="01550001"></ns-product-detail>
+        <ns-product-detail sku="01550004"></ns-product-detail>
+        <ns-product-detail sku="01003610"></ns-product-detail>
+    </div>
+<ns-footer></ns-footer>
+</body>
+</html>
